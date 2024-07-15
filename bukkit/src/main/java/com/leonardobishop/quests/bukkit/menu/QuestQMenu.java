@@ -6,6 +6,7 @@ import com.leonardobishop.quests.bukkit.menu.element.BackMenuElement;
 import com.leonardobishop.quests.bukkit.menu.element.MenuElement;
 import com.leonardobishop.quests.bukkit.menu.element.QuestMenuElement;
 import com.leonardobishop.quests.bukkit.util.chat.Chat;
+import com.leonardobishop.quests.common.enums.QuestStartResult;
 import com.leonardobishop.quests.common.player.QPlayer;
 import com.leonardobishop.quests.common.player.questprogressfile.QuestProgress;
 import com.leonardobishop.quests.common.quest.Quest;
@@ -46,6 +47,9 @@ public class QuestQMenu extends PaginatedQMenu {
                 if (!Bukkit.getPlayer(owner.getPlayerUUID()).hasPermission("quests.quest." + quest.getId())) {
                     continue;
                 }
+            }
+            if(quest.isHideIfComplete() && (owner.canStartQuest(quest)== QuestStartResult.QUEST_ALREADY_COMPLETED)) {
+                continue;
             }
             filteredQuests.add(new QuestMenuElement(plugin, quest, this));
         }

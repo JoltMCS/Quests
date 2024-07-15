@@ -36,6 +36,7 @@ public class Quest implements Comparable<Quest> {
     private boolean cancellable;
     private boolean countsTowardsLimit;
     private boolean hideIfLocked;
+    private boolean hideIfComplete;
     private Map<String, String> placeholders;
     private Map<String, String> progressPlaceholders;
     private String categoryid;
@@ -328,6 +329,14 @@ public class Quest implements Comparable<Quest> {
     }
 
     /**
+     * Should the quest be hidden if completed
+     * @return boolean
+     */
+    public boolean isHideIfComplete() {
+        return hideIfComplete;
+    }
+
+    /**
      * Compare the sort orders for this quest with another quest.
      *
      * @see Comparable#compareTo(Object)
@@ -362,6 +371,7 @@ public class Quest implements Comparable<Quest> {
         private boolean cancellable = true;
         private boolean countsTowardsLimit = true;
         private boolean hideIfLocked = false;
+        private boolean hideIfComplete = false;
         private Map<String, String> placeholders = Collections.emptyMap();
         private Map<String, String> progressPlaceholders = Collections.emptyMap();
         private String categoryid = null;
@@ -480,6 +490,11 @@ public class Quest implements Comparable<Quest> {
             return this;
         }
 
+        public Builder withHideIfComplete(boolean hideIfComplete) {
+            this.hideIfComplete = hideIfComplete;
+            return this;
+        }
+
         public Builder inCategory(String categoryid) {
             this.categoryid = categoryid;
             return this;
@@ -507,6 +522,7 @@ public class Quest implements Comparable<Quest> {
             quest.autoStartEnabled = this.autoStartEnabled;
             quest.countsTowardsLimit = countsTowardsLimit;
             quest.hideIfLocked = hideIfLocked;
+            quest.hideIfComplete = hideIfComplete;
             quest.cancellable = this.cancellable;
             quest.placeholders = this.placeholders;
             quest.progressPlaceholders = this.progressPlaceholders;
