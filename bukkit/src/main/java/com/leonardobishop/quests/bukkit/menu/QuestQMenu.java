@@ -35,7 +35,7 @@ public class QuestQMenu extends PaginatedQMenu {
 
         List<MenuElement> filteredQuests = new ArrayList<>();
         for (Quest quest : quests) {
-            if (config.getBoolean("options.gui-hide-locked")) {
+            if (config.getBoolean("options.gui-hide-locked") || quest.isHideIfLocked()) {
                 QuestProgress questProgress = owner.getQuestProgressFile().getQuestProgress(quest);
                 long cooldown = owner.getQuestProgressFile().getCooldownFor(quest);
                 if (!owner.getQuestProgressFile().hasMetRequirements(quest) || (!quest.isRepeatable() && questProgress.isCompletedBefore()) || cooldown > 0) {

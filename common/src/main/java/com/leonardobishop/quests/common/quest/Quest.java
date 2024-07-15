@@ -35,6 +35,7 @@ public class Quest implements Comparable<Quest> {
     private boolean autoStartEnabled;
     private boolean cancellable;
     private boolean countsTowardsLimit;
+    private boolean hideIfLocked;
     private Map<String, String> placeholders;
     private Map<String, String> progressPlaceholders;
     private String categoryid;
@@ -319,6 +320,14 @@ public class Quest implements Comparable<Quest> {
     }
 
     /**
+     * Should the quest be hidden if it is locked.
+     * @return boolean
+     */
+    public boolean isHideIfLocked() {
+        return hideIfLocked;
+    }
+
+    /**
      * Compare the sort orders for this quest with another quest.
      *
      * @see Comparable#compareTo(Object)
@@ -352,6 +361,7 @@ public class Quest implements Comparable<Quest> {
         private boolean autoStartEnabled = false;
         private boolean cancellable = true;
         private boolean countsTowardsLimit = true;
+        private boolean hideIfLocked = false;
         private Map<String, String> placeholders = Collections.emptyMap();
         private Map<String, String> progressPlaceholders = Collections.emptyMap();
         private String categoryid = null;
@@ -465,6 +475,11 @@ public class Quest implements Comparable<Quest> {
             return this;
         }
 
+        public Builder withHideIfLocked(boolean hideIfLocked) {
+            this.hideIfLocked = hideIfLocked;
+            return this;
+        }
+
         public Builder inCategory(String categoryid) {
             this.categoryid = categoryid;
             return this;
@@ -491,6 +506,7 @@ public class Quest implements Comparable<Quest> {
             quest.permissionRequired = this.permissionRequired;
             quest.autoStartEnabled = this.autoStartEnabled;
             quest.countsTowardsLimit = countsTowardsLimit;
+            quest.hideIfLocked = hideIfLocked;
             quest.cancellable = this.cancellable;
             quest.placeholders = this.placeholders;
             quest.progressPlaceholders = this.progressPlaceholders;
