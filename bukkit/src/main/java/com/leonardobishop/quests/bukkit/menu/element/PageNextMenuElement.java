@@ -21,6 +21,9 @@ public class PageNextMenuElement extends MenuElement {
     public ItemStack asItemStack() {
         // hide if on last page
         if (menu.getCurrentPage() == menu.getMaxPage()) {
+            if(config.getItem("gui.page-prev.first") != null) {
+                return config.getItem("gui.page-prev.first");
+            }
             return new ItemStack(Material.AIR);
         }
 
