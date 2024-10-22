@@ -118,7 +118,7 @@ dependencies {
     // Vault
     compileOnlyPlugin("com.github.MilkBowl:VaultAPI:1.7.1")
     // VotingPlugin
-    compileOnlyPlugin("com.bencodez:votingplugin:6.15")
+    compileOnlyPlugin("com.bencodez:votingplugin:6.17.2")
     // WildStacker
     compileOnlyPlugin("com.bgsoftware:WildStackerAPI:2023.3")
     // ZNPCsPlus
