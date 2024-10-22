@@ -25,6 +25,7 @@ public class Quest implements Comparable<Quest> {
     private List<String> startCommands;
     private List<String> cancelCommands;
     private List<String> expiryCommands;
+    private double vaultReward;
     private boolean repeatEnabled;
     private boolean cooldownEnabled;
     private int cooldown;
@@ -208,6 +209,16 @@ public class Quest implements Comparable<Quest> {
     }
 
     /**
+     * Get the Vault reward for this quest.
+     * The Vault reward is an amount of Vault economy money to be given upon completing the quest.
+     *
+     * @return double
+     */
+    public double getVaultReward() {
+        return this.vaultReward;
+    }
+
+    /**
      * Get if this quest can be repeated after completion.
      *
      * @return boolean
@@ -360,6 +371,7 @@ public class Quest implements Comparable<Quest> {
         private List<String> startCommands = Collections.emptyList();
         private List<String> cancelCommands = Collections.emptyList();
         private List<String> expiryCommands = Collections.emptyList();
+        private double vaultReward = 0.0D;
         private boolean repeatEnabled = false;
         private boolean cooldownEnabled = false;
         private int cooldown = 0;
@@ -422,6 +434,11 @@ public class Quest implements Comparable<Quest> {
 
         public Builder withExpiryCommands(List<String> expiryCommands) {
             this.expiryCommands = expiryCommands;
+            return this;
+        }
+
+        public Builder withVaultReward(double vaultReward) {
+            this.vaultReward = vaultReward;
             return this;
         }
 
@@ -512,6 +529,7 @@ public class Quest implements Comparable<Quest> {
             quest.startCommands = this.startCommands;
             quest.cancelCommands = this.cancelCommands;
             quest.expiryCommands = this.expiryCommands;
+            quest.vaultReward = this.vaultReward;
             quest.repeatEnabled = this.repeatEnabled;
             quest.cooldownEnabled = this.cooldownEnabled;
             quest.cooldown = this.cooldown;

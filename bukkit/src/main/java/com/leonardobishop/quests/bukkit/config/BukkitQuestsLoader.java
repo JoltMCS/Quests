@@ -7,6 +7,7 @@ import com.leonardobishop.quests.bukkit.item.ItemsAdderQuestItem;
 import com.leonardobishop.quests.bukkit.item.MMOItemsQuestItem;
 import com.leonardobishop.quests.bukkit.item.OraxenQuestItem;
 import com.leonardobishop.quests.bukkit.item.ParsedQuestItem;
+import com.leonardobishop.quests.bukkit.item.PyroFishingProQuestItem;
 import com.leonardobishop.quests.bukkit.item.QuestItem;
 import com.leonardobishop.quests.bukkit.item.QuestItemRegistry;
 import com.leonardobishop.quests.bukkit.item.SlimefunQuestItem;
@@ -275,6 +276,7 @@ public class BukkitQuestsLoader implements QuestsLoader {
                         List<String> startCommands = config.getStringList("startcommands");
                         List<String> cancelCommands = config.getStringList("cancelcommands");
                         List<String> expiryCommands = config.getStringList("expirycommands");
+                        double vaultReward = config.getDouble("vaultreward", 0.0D);
                         boolean repeatable = config.getBoolean("options.repeatable", false);
                         boolean cooldown = config.getBoolean("options.cooldown.enabled", false);
                         boolean timeLimit = config.getBoolean("options.time-limit.enabled", false);
@@ -311,6 +313,7 @@ public class BukkitQuestsLoader implements QuestsLoader {
                                 .withStartCommands(startCommands)
                                 .withCancelCommands(cancelCommands)
                                 .withExpiryCommands(expiryCommands)
+                                .withVaultReward(vaultReward)
                                 .withPlaceholders(placeholders)
                                 .withProgressPlaceholders(progressPlaceholders)
                                 .withCooldown(cooldownTime)
@@ -507,6 +510,10 @@ public class BukkitQuestsLoader implements QuestsLoader {
                         case "oraxen":
                             if (!Bukkit.getPluginManager().isPluginEnabled("Oraxen")) return FileVisitResult.CONTINUE;
                             item = new OraxenQuestItem(id, config.getString("item.id"));
+                            break;
+                        case "pyrofishingpro":
+                            if (!Bukkit.getPluginManager().isPluginEnabled("PyroFishingPro")) return FileVisitResult.CONTINUE;
+                            item = new PyroFishingProQuestItem(id, config.getInt("item.fish-number", -1), config.getString("item.tier"));
                             break;
                     }
 
